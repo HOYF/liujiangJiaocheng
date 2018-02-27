@@ -1,0 +1,109 @@
+{#模版语言，表示当前页面继承 base.html 文件中的所有内容#}
+{% extends 'base.html' %}
+{% load staticfiles %}
+{#设置专门的title#}
+{% block title %}登录{% endblock %}
+{#引入了针对性的login.css样式文件#}
+{% block css %}<line href="{% static 'css/login.css' %}" rel="stylesheet" />{% endblock %}
+
+{# 3. #}
+{#主要内容定义在 block content 内部#}
+{% block content %}
+    <div class="container">
+        <div class="col-md-4 col-md-offset-4">
+            <form class="form-login" action="/login/" method="post">
+                {% if message %}
+                    <div class="alert alert-warning">{{ message }}</div>
+                {% endif %}
+                {% csrf_token %}
+                <h2 class="text-center">欢迎登录</h2>
+
+            <!-- 注释手写表单，用 Django 自带的表单替换
+                <div class="form-group">
+                    <label for="id_username">用户名:</label>
+                    <input type="text" name="username" class="form-control" id="id_username" placeholder="Username" autofocus required>
+                </div>
+                <div class="form-group">
+                    <label for="id_password">密码:</label>
+                    <input type="password" name="password" class="form-control" id="id_password" placeholder="Password" required>
+                </div>
+            -->
+
+{#                {{ login_form.as_p }}#}
+
+                <div class="form-group">
+                    {{ login_form.username.label_tag }}
+                    {{ login_form.username }}
+                </div>
+
+                <div class="form-group">
+                    {{ login_form.password.label_tag }}
+                    {{ login_form.password }}
+                </div>
+
+                <div class="form-group">
+                    {{ login_form.captcha.errors }}
+                    {{ login_form.captcha.label_tag }}
+                    {{ login_form.captcha }}
+                </div>
+
+                <button type="reset" class="btn btn-default pull-left">重置</button>
+                <button type="submit" class="btn btn-primary pull-right">提交</button>
+            </form>
+        </div>
+    </div> <!-- /container -->
+{% endblock %}
+
+
+{# 1. #}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>登录</title>#}
+{#</head>#}
+{#<body>#}
+{#    <div style="margin: 15% 40%;">#}
+{#        <h1>欢迎登录</h1>#}
+{#        form标签主要确定目的地url和发送方法#}
+{#        <form action="/login/" method="post">#}
+{#            p标签将各个输入框分行#}
+{#            <p>#}
+{#                label标签为每个输入框提供一个前导提示，还有助于触屏使用#}
+{#                <label for="id_username">用户名:</label>#}
+{#                autofocus属性为用户名输入框自动聚焦；required表示该输入框必须填写#}
+{#                <input type="text" id="id_username" name="username" placeholder="用户名" autofocus required />#}
+{#            </p>#}
+{#            <p>#}
+{#                <label for="id_password">密码:</label>#}
+{#                <input type="password" id="id_password" placehold="密码" name="password" required />#}
+{#            </p>#}
+{#            <input type="submit" value="确定">#}
+{#        </form>#}
+{#    </div>#}
+{#</body>#}
+{#</html>#}
+
+{# 2. #}
+{#<body>#}
+{#<form>#}
+{#  <div class="form-group">#}
+{#    <label for="exampleInputEmail1">Email address</label>#}
+{#    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">#}
+{#  </div>#}
+{#  <div class="form-group">#}
+{#    <label for="exampleInputPassword1">Password</label>#}
+{#    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">#}
+{#  </div>#}
+{#  <div class="form-group">#}
+{#    <label for="exampleInputFile">File input</label>#}
+{#    <input type="file" id="exampleInputFile">#}
+{#    <p class="help-block">Example block-level help text here.</p>#}
+{#  </div>#}
+{#  <div class="checkbox">#}
+{#    <label>#}
+{#      <input type="checkbox"> Check me out#}
+{#    </label>#}
+{#  </div>#}
+{#  <button type="submit" class="btn btn-default">Submit</button>#}
+{#</form>#}
+{#</body>#}
